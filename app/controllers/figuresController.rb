@@ -10,10 +10,10 @@ class FiguresController < ApplicationController
   post '/figures' do
     @figure = Figure.new(params[:figure])
     if params[:landmark][:name]
-      @figure.landmarks << Landmark.new(params[:landmark])
+      @figure.landmarks << Landmark.create(params[:landmark])
     end
     if params[:title][:name]
-      @figure.titles << Title.new(params[:title])
+      @figure.titles << Title.create(params[:title])
     end
     @figure.save
     erb :'figures/show'
@@ -42,10 +42,10 @@ class FiguresController < ApplicationController
       @figure = Figure.find(params[:id])
       @figure.update (params[:figure])
       if params[:landmark][:name]
-        @figure.landmarks << Landmark.new(params[:landmark])
+        @figure.landmarks << Landmark.create(params[:landmark])
       end
       if params[:title][:name]
-        @figure.titles << Title.new(params[:title])
+        @figure.titles << Title.create(params[:title])
       end
       @figure.save
       redirect :"/figures/#{@figure.id}"
